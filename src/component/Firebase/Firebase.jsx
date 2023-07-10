@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import {getAuth,GoogleAuthProvider} from 'firebase/auth'
 
 const firebaseConfig = {
-   apiKey: "AIzaSyDKwe-cBg56b8ovuUCzEYcRZPf0B8S_xHQ",
+  apiKey: "AIzaSyDKwe-cBg56b8ovuUCzEYcRZPf0B8S_xHQ",
   authDomain: "static-shine-386809.firebaseapp.com",
   projectId: "static-shine-386809",
   storageBucket: "static-shine-386809.appspot.com",

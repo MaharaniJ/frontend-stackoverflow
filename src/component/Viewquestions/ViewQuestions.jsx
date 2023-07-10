@@ -121,7 +121,7 @@ useEffect(() => {
                 <div className="view-question-body-right">
                     <p>{question && parse(question.body)}</p>
                     <div className="question-tags">
-            {Array.isArray(tags)?tags.map((tag)=> <a className='question-tag' href='/'>{tag}</a>) : <a href='/'>{tags}</a> }
+            {Array.isArray(tags)?tags.map((tag,i)=> <a key={i} className='question-tag' href='/'>{tag}</a>) : <a href='/'>{tags}</a> }
             </div>
 
                 </div>
