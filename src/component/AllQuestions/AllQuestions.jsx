@@ -17,14 +17,14 @@ function AllQuestions(props) {
             <small>{props.views}  views</small>
         </div>
         <div className="questions-middleContent">
-            <Link to={`/ViewQuestion?q=${props._id}`} class='quest'  >{props.title}</Link>
+            <Link to={`/ViewQuestion?q=${props._id}`} className='quest'  >{props.title}</Link>
             <div className="question-tags">
             {Array.isArray(tags)?tags.map((tag)=> <a className='question-tag' href='/'>{tag}</a>) : <a href='/'>{tags}</a> }
             </div>
             
          </div>
         <div className="questions-right-content">
-            <p><Avatar src={props.user && props.user.photo}/></p>
+            <Avatar src={props.user && props.user.photo}/>
             <small>{props.user && props.user.displayName ? props.user.displayName : "User"}</small>
             <small>{props.createdAt && new Date(props.createdAt).toLocaleDateString()}</small>
         </div>

@@ -14,7 +14,7 @@ function SideBar() {
         <div className="public">
             <p>PUBLIC</p>
             <div className="publicContent">
-                <a href="/" class='icon' ><span className='icon1'><PublicIcon /></span>  Questions</a>
+                <a href="/" className='icon' ><span className='icon1'><PublicIcon /></span>  Questions</a>
                 <a href="/">Tags</a>
                 <a href="/">Users</a>
                 <a href="/">Companies</a>
@@ -23,14 +23,14 @@ function SideBar() {
         <div className="collectives">
             <p>COLLECTIVES</p>
             <div className="publicContent">
-                <a href="/" class='icon' ><span className='icon2'><StarsIcon /></span>  Explore Collectives</a>
+                <a href="/" className='icon' ><span className='icon2'><StarsIcon /></span>  Explore Collectives</a>
             </div>
             
         </div>
         <div className="teams">
             <p>TEAMS</p>
             <div className="publicContent">
-                <a href="/" class='icon' ><span className='icon2'><Groups2Icon /></span>  Create free teams</a>
+                <a href="/" className='icon' ><span className='icon2'><Groups2Icon /></span>  Create free teams</a>
             </div>
         </div>
     </div>
