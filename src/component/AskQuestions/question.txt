@@ -105,3 +105,91 @@ useEffect(() => {
     setFieldError(true);
 }
 }
+
+Gpt:
+import React, { useEffect, useState } from 'react';
+import { Avatar } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import SideBar from '../Sidebar/SideBar';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../features/userSlice';
+import parse from 'html-react-parser';
+
+import './ViewQuestions.css';
+
+function ViewQuestions() {
+  const navigate = useNavigate();
+  const search = window.location.search;
+  const params = new URLSearchParams(search);
+  const id = params.get('q');
+  const user = useSelector(selectUser);
+  const [question, setQuestion] = useState(null);
+  const [answer, setAnswer] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [data, setData] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [fieldError, setFieldError] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`https://backend-stackoverflow-x2hh.onrender.com/api/question/${id}`)
+      .then((response) => {
+        setQuestion(response.data);
+        setTags(JSON.parse(response.data.tags[0]));
+      })
+      .catch((error) => console.error(error));
+  }, [id]);
+
+  useEffect(() => {
+    axios
+      .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`)
+      .then((response) => {
+        setAnswer(response.data);
+      })
+      .catch((error) => console.error(error));
+  }, [id]);
+
+  const handleAnswerSubmit = async (event) => {
+    event.preventDefault();
+    if (data.trim() !== '') {
+      setFieldError(false);
+      setLoading(true);
+      const parsedData = {
+        question_id: id,
+        answer: data,
+        user: user,
+      };
+      try {
+        await axios.post('https://backend-stackoverflow-x2hh.onrender.com/api/answer', parsedData);
+        setLoading(false);
+        alert('Answer added successfully');
+        // Refresh answers after adding a new answer
+        axios
+          .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`)
+          .then((response) => {
+            setAnswer(response.data);
+          })
+          .catch((error) => console.error(error));
+      } catch (error) {
+        setLoading(false);
+        console.error(error);
+      }
+    } else {
+      setFieldError(true);
+    }
+  };
+
+  return (
+    <>
+      <SideBar />
+      <div className="view-questions">
+        {/* ... (Rest of your code) */}
+      </div>
+    </>
+  );
+}
+
+export default ViewQuestions;
