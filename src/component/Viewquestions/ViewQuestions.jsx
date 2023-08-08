@@ -31,9 +31,9 @@ function ViewQuestions() {
   useEffect(() => {
     axios
       .get(`https://backend-stackoverflow-x2hh.onrender.com/api/question/${id}`)
-      .then((response) => {
-        setQuestion(response.data);
-        setTags(JSON.parse(response.data.tags[0]));
+      .then((res) => {
+        setQuestion(res.data);
+        setTags(JSON.parse(res.data.tags[0]));
       })
       .catch((error) => console.error(error));
   }, [id]);
@@ -44,8 +44,8 @@ function ViewQuestions() {
       .put(
         `https://backend-stackoverflow-x2hh.onrender.com/api/question/questionViews/${id}`
       )
-      .then((response) => {
-        console.log("views updated to", response.data.views);
+      .then((res) => {
+        console.log("views updated to", res.data.views);
       })
       .catch((error) => console.error("not view", error));
   }, [id]);
@@ -53,9 +53,9 @@ function ViewQuestions() {
   useEffect(() => {
     axios
       .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`)
-      .then((response) => {
+      .then((res) => {
         // console.log(response.data)
-        setAnswer(response.data);
+        setAnswer(res.data);
       })
       .catch((error) => console.error(error));
   }, [id]);
@@ -63,12 +63,11 @@ function ViewQuestions() {
   const user = useSelector(selectUser);
 
   const handleSubmit = async (event) => {
-    axios
-      .put(
+    axios.put(
         `https://backend-stackoverflow-x2hh.onrender.com/api/question/answerViews/${id}`
       )
-      .then((response) => {
-        console.log("answers updated to", response.data.answers);
+      .then((res) => {
+        console.log("answers updated to", res.data.answers);
       })
       .catch((error) => console.error("not view", error));
     event.preventDefault();
