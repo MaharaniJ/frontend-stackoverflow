@@ -29,70 +29,59 @@ function ViewQuestions() {
     const [loading,setloading] = useState(false);
     const [fieldError, setFieldError] = useState(false);
 
-
-
-  useEffect(() => {
-    axios.get(`https://backend-stackoverflow-x2hh.onrender.com/api/question/${id}`)
-      .then(response => {
-        setQuestion(response.data);
-        setTags( JSON.parse(response.data.tags[0]));
-        }
-        )
-      .catch(error => console.error(error));
-  }, [id]);
-
-//   Updating views on question 
-useEffect(() => {
-    axios.put(`https://backend-stackoverflow-x2hh.onrender.com/api/question/questionViews/${id}`)
-      .then(response => {
-        console.log("views updated to", response.data.views);
-      })
-      .catch(error => console.error("not view", error));
-  }, [id]);
-  
- 
-   
- 
-  useEffect(() => {
-    axios.get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`)
-      .then(response => {
-        // console.log(response.data)
-        setAnswer(response.data);
-        }
-        )
-      .catch(error => console.error(error));
-  }, [id]);
-
-  const user = useSelector(selectUser);
-
-  const handleSubmit = async(event) => {
-    axios.put(`https://backend-stackoverflow-x2hh.onrender.com/api/question/answerViews/${id}`)
-    .then(response => {
-      console.log("answers updated to", response.data.answers);
-    })
-    .catch(error => console.error("not view", error));
-    event.preventDefault();
-    if(data !== ""){
      
-        setFieldError(false);
-        setloading(true);
-        const parsedData ={
-            question_id:id ,
+    useEffect(() => {
+        axios
+          .get(`https://backend-stackoverflow-x2hh.onrender.com/api/question/${id}`)
+          .then((response) => {
+            setQuestion(response.data);
+            setTags(JSON.parse(response.data.tags[0]));
+          })
+          .catch((error) => console.error(error));
+      }, [id]);
+    
+      useEffect(() => {
+        axios
+          .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`)
+          .then((response) => {
+            setAnswer(response.data);
+          })
+          .catch((error) => console.error(error));
+      }, [id]);
+    
+      const user = useSelector(selectUser);
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (data.trim() !== '') {
+          setFieldError(false);
+          setloading(true);
+          const parsedData = {
+            question_id: id,
             answer: data,
             user: user
-    }
-    await axios.post("https://backend-stackoverflow-x2hh.onrender.com/api/answer",parsedData).then((res)=>{
-        setloading(false);
-        alert("Added successfully")
-        navigate('/')
-    }).catch(function (error) {
-        setloading(false);
-        console.log(error);
-    })
-}else{
-    setFieldError(true);
-}
-}
+          };
+          try {
+            await axios.post('https://backend-stackoverflow-x2hh.onrender.com/api/answer', parsedData);
+            setloading(false);
+            alert('Answer added successfully');
+            // Refresh answers after adding a new answer
+            axios
+              .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`)
+              .then((response) => {
+                setAnswer(response.data);
+              })
+              .catch((error) => console.error(error));
+          } catch (error) {
+            setloading(false);
+            console.error(error);
+          }
+        } else {
+          setFieldError(true);
+        }
+      };
+    
+
+
 
   return (
     <>
