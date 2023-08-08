@@ -16,7 +16,7 @@ function Navbar() {
       <div className="content">
         <div className="left-content">
           <Link to='/'>
-            <img srcSet= "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Stack_Overflow_icon.svg/768px-Stack_Overflow_icon.svg.png (max-width: 768w), https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg 1200w" alt='logo' />
+            <img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Stack_Overflow_icon.svg/768px-Stack_Overflow_icon.svg.png (max-width: 768w), https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg 1200w" alt='logo' />
           </Link>
           <p>Products</p>
         </div>
