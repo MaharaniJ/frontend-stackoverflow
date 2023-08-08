@@ -12,7 +12,7 @@ function Main(props) {
     // console.log(questions.tags)
     useEffect(()=>{
         async function fetchData(){
-            await axios.get('/api/question').then((res)=> {
+            await axios.get('https://backend-stackoverflow-x2hh.onrender.com/api/question').then((res)=> {
                 setLoading(false);
                 setQuestions(res.data);
                 // console.log(res.data);
