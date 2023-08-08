@@ -53,7 +53,10 @@ function Question() {
       console.log(parsedData);
 
       try {
-        const response = await axios.post("/api/question", parsedData);
+        const response = await axios.post(
+          "https://backend-stackoverflow-x2hh.onrender.com/api/question", // Use the correct backend URL here
+          parsedData
+        );
         console.log(response);
         setloading(false);
         alert("Added successfully");
