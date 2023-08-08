@@ -32,7 +32,7 @@ function ViewQuestions() {
 
 
   useEffect(() => {
-    axios.get(`/api/question/${id}`)
+    axios.get(`https://backend-stackoverflow-x2hh.onrender.com/api/question/${id}`)
       .then(response => {
         setQuestion(response.data);
         setTags( JSON.parse(response.data.tags[0]));
@@ -43,7 +43,7 @@ function ViewQuestions() {
 
 //   Updating views on question 
 useEffect(() => {
-    axios.put(`/api/question/questionViews/${id}`)
+    axios.put(`https://backend-stackoverflow-x2hh.onrender.com/api/question/questionViews/${id}`)
       .then(response => {
         console.log("views updated to", response.data.views);
       })
@@ -54,7 +54,7 @@ useEffect(() => {
    
  
   useEffect(() => {
-    axios.get(`/api/answer/${id}`)
+    axios.get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`)
       .then(response => {
         // console.log(response.data)
         setAnswer(response.data);
@@ -66,7 +66,7 @@ useEffect(() => {
   const user = useSelector(selectUser);
 
   const handleSubmit = async(event) => {
-    axios.put(`/api/question/answerViews/${id}`)
+    axios.put(`https://backend-stackoverflow-x2hh.onrender.com/api/question/answerViews/${id}`)
     .then(response => {
       console.log("answers updated to", response.data.answers);
     })
@@ -81,7 +81,7 @@ useEffect(() => {
             answer: data,
             user: user
     }
-    await axios.post("/api/answer",parsedData).then((res)=>{
+    await axios.post("https://backend-stackoverflow-x2hh.onrender.com/api/answer",parsedData).then((res)=>{
         setloading(false);
         alert("Added successfully")
         navigate('/')
