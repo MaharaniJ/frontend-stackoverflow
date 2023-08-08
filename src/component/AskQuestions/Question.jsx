@@ -50,7 +50,7 @@ function Question() {
             tags: JSON.stringify(tags),
         }
         console.log(parsedData);
-       const data1 = await axios.post("/api/question",parsedData).then((res)=>{
+       const data1 = await axios.post("https://backend-stackoverflow-x2hh.onrender.com/api/question",parsedData).then((res)=>{
             setloading(false);
             alert("Added successfully")
             navigate('/')
