@@ -13,7 +13,7 @@ function Main(props) {
   useEffect(() => {
     async function fetchData() {
       await axios
-        .get("https://backend-stackoverflow-x2hh.onrender.com/api/question")
+        .get("/api/question")
         .then((res) => {
           setLoading(false);
           setQuestions(res.data);
