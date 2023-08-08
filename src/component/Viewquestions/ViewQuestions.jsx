@@ -38,11 +38,7 @@ function ViewQuestions() {
       .catch((error) => console.error(error));
   }, [id]);
 
-  const axiosConfig = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+ 
   //   Updating views on question
 
   
@@ -59,7 +55,12 @@ function ViewQuestions() {
 
   useEffect(() => {
     axios
-      .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`)
+      .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`,
+      {
+        headers: {
+            "Content-Type": "application/json",
+          },
+      })
       .then((res) => {
         // console.log(response.data)
         setAnswer(res.data);
