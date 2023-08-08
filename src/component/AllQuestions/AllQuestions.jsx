@@ -1,12 +1,23 @@
 import { Avatar } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './allquestions.css'
+import axios from 'axios';
 
 
 function AllQuestions(props) {
     let tags  = JSON.parse(props.tags[0]);
-
+    const [questions, setQuestions] = useState([]);
+    useEffect(() => {
+        // Fetch questions from your API and update state
+        axios.get('https://backend-stackoverflow-x2hh.onrender.com/api/question')
+          .then(response => {
+            setQuestions(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching questions:', error);
+          });
+      }, []);
 
   return (
     <>
