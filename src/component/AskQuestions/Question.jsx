@@ -37,34 +37,69 @@ function Question() {
             setTags(tags.slice(0, -1));
         }
     };
-    
-    const handleSubmit = async(event) => {
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if(title !=="" && data!==""){
-            setFieldError(false);
-            setloading(true);
-            const parsedData ={
-            user:user,
-            title:title,
-            body:data,
+        
+        if (title !== "" && data !== "") {
+          setFieldError(false);
+          setloading(true);
+      
+          const parsedData = {
+            user: user,
+            title: title,
+            body: data,
             tags: JSON.stringify(tags),
-        }
-        console.log(parsedData);
-       const data1 = await axios.post("https://backend-stackoverflow-x2hh.onrender.com/api/question",parsedData).then((res)=>{
+          };
+      
+          console.log(parsedData);
+      
+          try {
+            const response = await axios.post(
+              "https://backend-stackoverflow-x2hh.onrender.com/api/question", // Use the correct backend URL here
+              parsedData
+            );
+      
             setloading(false);
-            alert("Added successfully")
-            navigate('/')
-        }).catch(function (error) {
+            alert("Added successfully");
+            navigate('/');
+          } catch (error) {
             setloading(false);
             console.log(error);
-        })
-        console.log(data1)
-    } 
-    else{
-        setFieldError(true);
-    }
+          }
+        } else {
+          setFieldError(true);
+        }
+      };
+      
     
-    }
+    // const handleSubmit = async(event) => {
+    //     event.preventDefault();
+    //     if(title !=="" && data!==""){
+    //         setFieldError(false);
+    //         setloading(true);
+    //         const parsedData ={
+    //         user:user,
+    //         title:title,
+    //         body:data,
+    //         tags: JSON.stringify(tags),
+    //     }
+    //     console.log(parsedData);
+    //    const data1 = await axios.post("https://backend-stackoverflow-x2hh.onrender.com/api/question",parsedData).then((res)=>{
+    //         setloading(false);
+    //         alert("Added successfully")
+    //         navigate('/')
+    //     }).catch(function (error) {
+    //         setloading(false);
+    //         console.log(error);
+    //     })
+    //     console.log(data1)
+    // } 
+    // else{
+    //     setFieldError(true);
+    // }
+    
+    // }
     return (
         <>
             <div className="question">
