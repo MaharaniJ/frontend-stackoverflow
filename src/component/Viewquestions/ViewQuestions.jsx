@@ -38,10 +38,8 @@ function ViewQuestions() {
       .catch((error) => console.error(error));
   }, [id]);
 
- 
   //   Updating views on question
 
-  
   useEffect(() => {
     axios
       .put(
@@ -55,11 +53,10 @@ function ViewQuestions() {
 
   useEffect(() => {
     axios
-      .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`,
-      {
+      .get(`https://backend-stackoverflow-x2hh.onrender.com/api/answer/${id}`, {
         headers: {
-            "Content-Type": "application/json",
-          },
+          "Content-Type": "application/json",
+        },
       })
       .then((res) => {
         // console.log(response.data)
@@ -71,7 +68,8 @@ function ViewQuestions() {
   const user = useSelector(selectUser);
 
   const handleSubmit = async (event) => {
-    axios.put(
+    axios
+      .put(
         `https://backend-stackoverflow-x2hh.onrender.com/api/question/answerViews/${id}`
       )
       .then((res) => {
