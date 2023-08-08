@@ -38,7 +38,14 @@ function ViewQuestions() {
       .catch((error) => console.error(error));
   }, [id]);
 
+  const axiosConfig = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
   //   Updating views on question
+
+  
   useEffect(() => {
     axios
       .put(
